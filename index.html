@@ -218,6 +218,22 @@
     z-index: 2;
   }
 
+  .logo {
+    position: absolute;
+    top: 0.8rem;
+    right: 0.8rem;
+    width: 80px;
+    height: 80px;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(212,175,55,0.6);
+    opacity: 0.85;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.7));
+    z-index: 2;
+  }
+
   .influence {
     font-size: 1rem;
     color: #999;
@@ -538,19 +554,20 @@ const scientists = [
     flag: "\uD83C\uDDFA\uD83C\uDDF8\uD83C\uDDEC\uD83C\uDDE7"
   },
   {
-    name: "Stephen Hawking",
-    years: "1942\u20132018",
-    field: "Astrophysik",
-    bio: "Britischer Kosmologe und Bestsellerautor.",
+    name: "Peter Higgs",
+    years: "1929\u20132024",
+    field: "Theoretische Physik",
+    bio: "Britischer Physiker, Entdecker des Higgs-Mechanismus.",
     achievements: [
-      "Theorie der Hawking-Strahlung",
-      "Forschung zu Schwarzen L\u00f6chern",
-      "Singularit\u00e4tentheoreme (mit Penrose)",
-      "Bestseller: Eine kurze Geschichte der Zeit"
+      "Vorhersage des Higgs-Bosons (1964)",
+      "Erkl\u00e4rung der Masse von Elementarteilchen",
+      "Best\u00e4tigung am CERN durch den LHC (2012)",
+      "Nobelpreis f\u00fcr Physik 2013"
     ],
-    influence: "Popularisierte die Kosmologie weltweit.",
-    image: "portraits/12_Stephen_Hawking.jpg",
-    symbol: "\uD83D\uDD73\uFE0F",
+    influence: "Vervollst\u00e4ndigte das Standardmodell der Teilchenphysik.",
+    image: "portraits/17_Peter_Higgs.jpg",
+    symbol: "",
+    logo: "portraits/Lucas-Higgs-CE0047H-nice2.jpg",
     flag: "\uD83C\uDDEC\uD83C\uDDE7"
   }
 ];
@@ -590,7 +607,7 @@ scientists.forEach((s, i) => {
     : `<div class="slide-image">
         <img src="${s.image}" alt="${s.name}" loading="lazy">
         <div class="flag">${s.flag}</div>
-        <div class="symbol">${s.symbol}</div>
+        ${s.logo ? `<img class="logo" src="${s.logo}" alt="Logo">` : `<div class="symbol">${s.symbol}</div>`}
       </div>`;
   slide.innerHTML = `
     ${imageHTML}
