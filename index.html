@@ -85,6 +85,47 @@
     background: linear-gradient(to right, transparent 70%, #0a0a1a);
   }
 
+  .slide-image-duo {
+    width: 45%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .slide-image-duo .duo-half {
+    width: 100%;
+    height: 50%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide-image-duo .duo-half img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    filter: sepia(15%) contrast(1.05);
+  }
+
+  .slide-image-duo .duo-half::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, transparent 70%, #0a0a1a);
+  }
+
+  .duo-label {
+    position: absolute;
+    bottom: 0.4rem;
+    left: 0.8rem;
+    font-size: 1.1rem;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+    z-index: 2;
+  }
+
   .slide-content {
     width: 55%;
     padding: 4rem 4rem 4rem 3rem;
@@ -153,6 +194,28 @@
     color: #d4af37;
     font-size: 0.7em;
     top: 0.6em;
+  }
+
+  .flag {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    font-size: 4rem;
+    line-height: 1;
+    opacity: 0.9;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.7));
+    z-index: 2;
+  }
+
+  .symbol {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 12rem;
+    line-height: 1;
+    opacity: 0.85;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.7));
+    z-index: 2;
   }
 
   .influence {
@@ -261,7 +324,9 @@ const scientists = [
       "Hauptwerke: Sidereus Nuncius (1610), Dialogo (1632)"
     ],
     influence: "Begr\u00fcndete die empirische Methode in der Wissenschaft.",
-    image: "portraits/01_Galileo_Galilei.jpg"
+    image: "portraits/01_Galileo_Galilei.jpg",
+    symbol: "\uD83D\uDD2D",
+    flag: "\uD83C\uDDEE\uD83C\uDDF9"
   },
   {
     name: "Johannes Kepler",
@@ -275,7 +340,9 @@ const scientists = [
       "Hauptwerk: Astronomia Nova (1609)"
     ],
     influence: "Legte das mathematische Fundament f\u00fcr die Himmelsmechanik.",
-    image: "portraits/15_Johannes_Kepler.jpg"
+    image: "portraits/15_Johannes_Kepler.jpg",
+    symbol: "\uD83E\uDE90",
+    flag: "\uD83C\uDDE9\uD83C\uDDEA"
   },
   {
     name: "Isaac Newton",
@@ -289,7 +356,9 @@ const scientists = [
       "Hauptwerk: Principia Mathematica (1687)"
     ],
     influence: "Schuf das Fundament der klassischen Mechanik.",
-    image: "portraits/02_Isaac_Newton.jpg"
+    image: "portraits/02_Isaac_Newton.jpg",
+    symbol: "\uD83C\uDF4E",
+    flag: "\uD83C\uDDEC\uD83C\uDDE7"
   },
   {
     name: "Charles Darwin",
@@ -303,7 +372,9 @@ const scientists = [
       "Hauptwerk: On the Origin of Species (1859)"
     ],
     influence: "Legte den Grundstein der modernen Biologie.",
-    image: "portraits/03_Charles_Darwin.jpg"
+    image: "portraits/03_Charles_Darwin.jpg",
+    symbol: "\uD83D\uDC22",
+    flag: "\uD83C\uDDEC\uD83C\uDDE7"
   },
   {
     name: "James Clerk Maxwell",
@@ -317,7 +388,9 @@ const scientists = [
       "Hauptwerk: A Treatise on Electricity and Magnetism (1873)"
     ],
     influence: "Vereinheitlichte Elektrizit\u00e4t, Magnetismus und Licht; Basis f\u00fcr die Relativit\u00e4tstheorie.",
-    image: "portraits/04_James_Clerk_Maxwell.jpg"
+    image: "portraits/04_James_Clerk_Maxwell.jpg",
+    symbol: "\u26A1",
+    flag: "\uD83C\uDFF4\uDB40\uDC67\uDB40\uDC62\uDB40\uDC73\uDB40\uDC63\uDB40\uDC74\uDB40\uDC7F"
   },
   {
     name: "Max Planck",
@@ -331,7 +404,9 @@ const scientists = [
       "Nobelpreis f\u00fcr Physik 1918"
     ],
     influence: "\u00dcbergang von der klassischen zur modernen Physik.",
-    image: "portraits/06_Max_Planck.jpg"
+    image: "portraits/06_Max_Planck.jpg",
+    symbol: "\u269B\uFE0F",
+    flag: "\uD83C\uDDE9\uD83C\uDDEA"
   },
   {
     name: "Fritz Haber",
@@ -345,7 +420,9 @@ const scientists = [
       "Ein Drittel der Weltern\u00e4hrung basiert auf seinem Verfahren"
     ],
     influence: "Sein Verfahren ern\u00e4hrt heute fast die H\u00e4lfte der Weltbev\u00f6lkerung.",
-    image: "portraits/13_Fritz_Haber.jpg"
+    image: "portraits/13_Fritz_Haber.jpg",
+    symbol: "\uD83E\uDDEA",
+    flag: "\uD83C\uDDE9\uD83C\uDDEA"
   },
   {
     name: "Guglielmo Marconi",
@@ -359,7 +436,9 @@ const scientists = [
       "Grundstein der modernen Telekommunikation"
     ],
     influence: "Erm\u00f6glichte die drahtlose Kommunikation und ver\u00e4nderte die Welt.",
-    image: "portraits/16_Guglielmo_Marconi.jpg"
+    image: "portraits/16_Guglielmo_Marconi.jpg",
+    symbol: "\uD83D\uDCE1",
+    flag: "\uD83C\uDDEE\uD83C\uDDF9"
   },
   {
     name: "Albert Einstein",
@@ -373,7 +452,9 @@ const scientists = [
       "Nobelpreis f\u00fcr Physik 1921"
     ],
     influence: "Revolutionierte unser Verst\u00e4ndnis von Raum und Zeit.",
-    image: "portraits/07_Albert_Einstein.jpg"
+    image: "portraits/07_Albert_Einstein.jpg",
+    symbol: "\uD83D\uDCAB",
+    flag: "\uD83C\uDDE9\uD83C\uDDEA"
   },
   {
     name: "Alexander Fleming",
@@ -387,7 +468,9 @@ const scientists = [
       "Nobelpreis f\u00fcr Medizin 1945"
     ],
     influence: "Begr\u00fcndete das Zeitalter der Antibiotika.",
-    image: "portraits/08_Alexander_Fleming.jpg"
+    image: "portraits/08_Alexander_Fleming.jpg",
+    symbol: "\uD83D\uDC8A",
+    flag: "\uD83C\uDFF4\uDB40\uDC67\uDB40\uDC62\uDB40\uDC73\uDB40\uDC63\uDB40\uDC74\uDB40\uDC7F"
   },
   {
     name: "Niels Bohr",
@@ -401,7 +484,9 @@ const scientists = [
       "Nobelpreis f\u00fcr Physik 1922"
     ],
     influence: "Zentral f\u00fcr das Verst\u00e4ndnis des atomaren Aufbaus.",
-    image: "portraits/09_Niels_Bohr.jpg"
+    image: "portraits/09_Niels_Bohr.jpg",
+    symbol: "\u269B\uFE0F",
+    flag: "\uD83C\uDDE9\uD83C\uDDF0"
   },
   {
     name: "John von Neumann",
@@ -415,7 +500,9 @@ const scientists = [
       "Beitr\u00e4ge zum Manhattan-Projekt"
     ],
     influence: "Einer der vielseitigsten Wissenschafter des 20. Jahrhunderts.",
-    image: "portraits/14_John_von_Neumann.jpg"
+    image: "portraits/14_John_von_Neumann.jpg",
+    symbol: "\uD83D\uDCBB",
+    flag: "\uD83C\uDDED\uD83C\uDDFA"
   },
   {
     name: "Alan Turing",
@@ -429,21 +516,26 @@ const scientists = [
       "Turing-Test zur Bewertung von KI"
     ],
     influence: "Schuf das theoretische Fundament der Informatik.",
-    image: "portraits/10_Alan_Turing.jpg"
+    image: "portraits/10_Alan_Turing.jpg",
+    symbol: "\uD83D\uDD10",
+    flag: "\uD83C\uDDEC\uD83C\uDDE7"
   },
   {
-    name: "James Watson",
-    years: "geb. 1928",
+    name: "Watson & Crick",
+    years: "geb. 1928 / 1916\u20132004",
     field: "Molekularbiologie",
-    bio: "US-amerikanischer Molekularbiologe.",
+    bio: "James Watson (US) und Francis Crick (GB) entschl\u00fcsselten gemeinsam die Struktur der DNA.",
     achievements: [
-      "Entdeckung der Doppelhelix-Struktur der DNA",
-      "Zusammenarbeit mit Francis Crick",
-      "Leitung des Humangenomprojekts",
+      "Entdeckung der Doppelhelix-Struktur der DNA (1953)",
+      "Basierend auf R\u00f6ntgendaten von Rosalind Franklin",
+      "Leitung des Humangenomprojekts (Watson)",
       "Nobelpreis f\u00fcr Medizin 1962"
     ],
-    influence: "Legte den Grundstein der modernen Genetik.",
-    image: "portraits/11_James_Watson.jpg"
+    influence: "Legten den Grundstein der modernen Genetik.",
+    image: "portraits/11_James_Watson.jpg",
+    image2: "portraits/11b_Francis_Crick.jpg",
+    symbol: "\uD83E\uDDEC",
+    flag: "\uD83C\uDDFA\uD83C\uDDF8\uD83C\uDDEC\uD83C\uDDE7"
   },
   {
     name: "Stephen Hawking",
@@ -457,7 +549,9 @@ const scientists = [
       "Bestseller: Eine kurze Geschichte der Zeit"
     ],
     influence: "Popularisierte die Kosmologie weltweit.",
-    image: "portraits/12_Stephen_Hawking.jpg"
+    image: "portraits/12_Stephen_Hawking.jpg",
+    symbol: "\uD83D\uDD73\uFE0F",
+    flag: "\uD83C\uDDEC\uD83C\uDDE7"
   }
 ];
 
@@ -480,10 +574,26 @@ container.appendChild(titleSlide);
 scientists.forEach((s, i) => {
   const slide = document.createElement('div');
   slide.className = 'slide slide-scientist';
+  const imageHTML = s.image2
+    ? `<div class="slide-image-duo">
+        <div class="duo-half">
+          <img src="${s.image}" alt="Watson" loading="lazy">
+          <div class="duo-label">J. Watson</div>
+        </div>
+        <div class="duo-half">
+          <img src="${s.image2}" alt="Crick" loading="lazy">
+          <div class="duo-label">F. Crick</div>
+        </div>
+        <div class="flag">${s.flag}</div>
+        <div class="symbol">${s.symbol}</div>
+      </div>`
+    : `<div class="slide-image">
+        <img src="${s.image}" alt="${s.name}" loading="lazy">
+        <div class="flag">${s.flag}</div>
+        <div class="symbol">${s.symbol}</div>
+      </div>`;
   slide.innerHTML = `
-    <div class="slide-image">
-      <img src="${s.image}" alt="${s.name}" loading="lazy">
-    </div>
+    ${imageHTML}
     <div class="slide-content">
       <div class="slide-number">Wissenschafter ${i + 1} von 15</div>
       <h2>${s.name}</h2>
