@@ -1,1 +1,538 @@
-slideshow.html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Die 15 gr&ouml;&szlig;ten Wissenschafter der Neuzeit</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: #0a0a1a;
+    color: #e8e8e8;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  .slideshow {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    pointer-events: none;
+  }
+
+  .slide.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Titel-Slide */
+  .slide-title {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: radial-gradient(ellipse at center, #1a1a3a, #0a0a1a);
+  }
+
+  .slide-title h1 {
+    font-size: 3.2rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5em;
+    background: linear-gradient(135deg, #d4af37, #f0e68c, #d4af37);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .slide-title p {
+    font-size: 1.3rem;
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* Wissenschafter-Slides */
+  .slide-scientist {
+    flex-direction: row;
+  }
+
+  .slide-image {
+    width: 45%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(15%) contrast(1.05);
+  }
+
+  .slide-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, transparent 70%, #0a0a1a);
+  }
+
+  .slide-content {
+    width: 55%;
+    padding: 4rem 4rem 4rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(135deg, #0a0a1a 0%, #111130 100%);
+  }
+
+  .slide-number {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: #d4af37;
+    margin-bottom: 0.5em;
+  }
+
+  .slide-content h2 {
+    font-size: 2.6rem;
+    margin-bottom: 0.15em;
+    background: linear-gradient(135deg, #fff, #ccc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .slide-content .field {
+    font-size: 1.1rem;
+    color: #d4af37;
+    margin-bottom: 1.5em;
+    font-style: italic;
+  }
+
+  .slide-content .dates {
+    font-size: 1rem;
+    color: #999;
+    margin-bottom: 1.8em;
+    padding-bottom: 1.2em;
+    border-bottom: 1px solid #333;
+  }
+
+  .slide-content .bio {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #ccc;
+    margin-bottom: 1.5em;
+  }
+
+  .achievements {
+    list-style: none;
+    margin-bottom: 1.5em;
+  }
+
+  .achievements li {
+    padding: 0.4em 0;
+    padding-left: 1.5em;
+    position: relative;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #bbb;
+  }
+
+  .achievements li::before {
+    content: '\25C6';
+    position: absolute;
+    left: 0;
+    color: #d4af37;
+    font-size: 0.7em;
+    top: 0.6em;
+  }
+
+  .influence {
+    font-size: 1rem;
+    color: #999;
+    font-style: italic;
+    border-left: 3px solid #d4af37;
+    padding-left: 1em;
+  }
+
+  /* Navigation */
+  .nav {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 100;
+  }
+
+  .nav button {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav button:hover {
+    background: rgba(212,175,55,0.3);
+    border-color: #d4af37;
+  }
+
+  .dots {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+
+  .dot.active {
+    background: #d4af37;
+    transform: scale(1.3);
+  }
+
+  .counter {
+    position: fixed;
+    top: 1.5rem;
+    right: 2rem;
+    font-size: 0.9rem;
+    color: #666;
+    z-index: 100;
+  }
+
+  /* Keyboard hint */
+  .hint {
+    position: fixed;
+    top: 1.5rem;
+    left: 2rem;
+    font-size: 0.8rem;
+    color: #444;
+    z-index: 100;
+  }
+</style>
+</head>
+<body>
+
+<div class="slideshow" id="slideshow"></div>
+
+<div class="nav">
+  <button id="prev">&#9664;</button>
+  <div class="dots" id="dots"></div>
+  <button id="next">&#9654;</button>
+</div>
+
+<div class="counter" id="counter"></div>
+<div class="hint">&larr; &rarr; Pfeiltasten | Leertaste</div>
+
+<script>
+const scientists = [
+  {
+    name: "Galileo Galilei",
+    years: "1564\u20131642",
+    field: "Astronomie & Physik",
+    bio: "Italienischer Polymath, gilt als Vater der modernen Astronomie.",
+    achievements: [
+      "Entdeckung der Jupitermonde",
+      "Phasen der Venus beobachtet",
+      "Fallgesetze formuliert",
+      "Hauptwerke: Sidereus Nuncius (1610), Dialogo (1632)"
+    ],
+    influence: "Begr\u00fcndete die empirische Methode in der Wissenschaft.",
+    image: "portraits/01_Galileo_Galilei.jpg"
+  },
+  {
+    name: "Johannes Kepler",
+    years: "1571\u20131630",
+    field: "Astronomie & Mathematik",
+    bio: "Deutscher Mathematiker und Astronom.",
+    achievements: [
+      "Drei Keplersche Gesetze der Planetenbewegung",
+      "Beweis der elliptischen Planetenbahnen",
+      "Grundlagen der modernen Optik",
+      "Hauptwerk: Astronomia Nova (1609)"
+    ],
+    influence: "Legte das mathematische Fundament f\u00fcr die Himmelsmechanik.",
+    image: "portraits/15_Johannes_Kepler.jpg"
+  },
+  {
+    name: "Isaac Newton",
+    years: "1643\u20131727",
+    field: "Physik & Mathematik",
+    bio: "Englischer Physiker und Mathematiker.",
+    achievements: [
+      "Gravitationsgesetz aufgestellt",
+      "Drei Bewegungsgesetze formuliert",
+      "Infinitesimalrechnung entwickelt",
+      "Hauptwerk: Principia Mathematica (1687)"
+    ],
+    influence: "Schuf das Fundament der klassischen Mechanik.",
+    image: "portraits/02_Isaac_Newton.jpg"
+  },
+  {
+    name: "Charles Darwin",
+    years: "1809\u20131882",
+    field: "Biologie & Naturgeschichte",
+    bio: "Britischer Naturforscher, ber\u00fchmte Reise auf der HMS Beagle.",
+    achievements: [
+      "Evolutionstheorie durch nat\u00fcrliche Selektion",
+      "Umfassende Studien zur Artbildung",
+      "Grundlagen der modernen Biologie",
+      "Hauptwerk: On the Origin of Species (1859)"
+    ],
+    influence: "Legte den Grundstein der modernen Biologie.",
+    image: "portraits/03_Charles_Darwin.jpg"
+  },
+  {
+    name: "James Clerk Maxwell",
+    years: "1831\u20131879",
+    field: "Theoretische Physik",
+    bio: "Schottischer Physiker.",
+    achievements: [
+      "Maxwell-Gleichungen des Elektromagnetismus",
+      "Kinetische Gastheorie mitentwickelt",
+      "Erste Farbfotografie demonstriert",
+      "Hauptwerk: A Treatise on Electricity and Magnetism (1873)"
+    ],
+    influence: "Vereinheitlichte Elektrizit\u00e4t, Magnetismus und Licht; Basis f\u00fcr die Relativit\u00e4tstheorie.",
+    image: "portraits/04_James_Clerk_Maxwell.jpg"
+  },
+  {
+    name: "Max Planck",
+    years: "1858\u20131947",
+    field: "Quantenphysik",
+    bio: "Deutscher Physiker, Begr\u00fcnder der Quantenphysik.",
+    achievements: [
+      "Quantisierung der Energie entdeckt",
+      "Plancksches Wirkungsquantum eingef\u00fchrt",
+      "Plancksche Strahlungsformel",
+      "Nobelpreis f\u00fcr Physik 1918"
+    ],
+    influence: "\u00dcbergang von der klassischen zur modernen Physik.",
+    image: "portraits/06_Max_Planck.jpg"
+  },
+  {
+    name: "Fritz Haber",
+    years: "1868\u20131934",
+    field: "Chemie",
+    bio: "Deutscher Chemiker, umstrittener Pionier der chemischen Industrie.",
+    achievements: [
+      "Haber-Bosch-Verfahren zur Ammoniaksynthese",
+      "Erm\u00f6glichte industrielle D\u00fcngemittelproduktion",
+      "Nobelpreis f\u00fcr Chemie 1918",
+      "Ein Drittel der Weltern\u00e4hrung basiert auf seinem Verfahren"
+    ],
+    influence: "Sein Verfahren ern\u00e4hrt heute fast die H\u00e4lfte der Weltbev\u00f6lkerung.",
+    image: "portraits/13_Fritz_Haber.jpg"
+  },
+  {
+    name: "Guglielmo Marconi",
+    years: "1874\u20131937",
+    field: "Funktechnik & Elektrotechnik",
+    bio: "Italienischer Erfinder und Elektroingenieur.",
+    achievements: [
+      "Erste drahtlose Funk\u00fcbertragung \u00fcber den Atlantik (1901)",
+      "Entwicklung praxistauglicher Radiosysteme",
+      "Nobelpreis f\u00fcr Physik 1909",
+      "Grundstein der modernen Telekommunikation"
+    ],
+    influence: "Erm\u00f6glichte die drahtlose Kommunikation und ver\u00e4nderte die Welt.",
+    image: "portraits/16_Guglielmo_Marconi.jpg"
+  },
+  {
+    name: "Albert Einstein",
+    years: "1879\u20131955",
+    field: "Theoretische Physik",
+    bio: "Deutsch-amerikanischer Physiker.",
+    achievements: [
+      "Spezielle und Allgemeine Relativit\u00e4tstheorie",
+      "Masse-Energie-\u00c4quivalenz: E=mc\u00b2",
+      "Erkl\u00e4rung des Photoelektrischen Effekts",
+      "Nobelpreis f\u00fcr Physik 1921"
+    ],
+    influence: "Revolutionierte unser Verst\u00e4ndnis von Raum und Zeit.",
+    image: "portraits/07_Albert_Einstein.jpg"
+  },
+  {
+    name: "Alexander Fleming",
+    years: "1881\u20131955",
+    field: "Medizin & Mikrobiologie",
+    bio: "Schottischer Arzt und Mikrobiologe.",
+    achievements: [
+      "Entdeckung des Penicillins (1928)",
+      "Erstes Antibiotikum der Geschichte",
+      "Entdeckung des Lysozyms",
+      "Nobelpreis f\u00fcr Medizin 1945"
+    ],
+    influence: "Begr\u00fcndete das Zeitalter der Antibiotika.",
+    image: "portraits/08_Alexander_Fleming.jpg"
+  },
+  {
+    name: "Niels Bohr",
+    years: "1885\u20131962",
+    field: "Atomphysik",
+    bio: "D\u00e4nischer Physiker.",
+    achievements: [
+      "Bohrsches Atommodell entwickelt",
+      "Beitr\u00e4ge zur Quantentheorie",
+      "Komplementarit\u00e4tsprinzip formuliert",
+      "Nobelpreis f\u00fcr Physik 1922"
+    ],
+    influence: "Zentral f\u00fcr das Verst\u00e4ndnis des atomaren Aufbaus.",
+    image: "portraits/09_Niels_Bohr.jpg"
+  },
+  {
+    name: "John von Neumann",
+    years: "1903\u20131957",
+    field: "Mathematik & Informatik",
+    bio: "Ungarisch-amerikanischer Mathematiker, Physiker und Informatiker.",
+    achievements: [
+      "Von-Neumann-Architektur moderner Computer",
+      "Mathematische Grundlagen der Quantenmechanik",
+      "Spieltheorie mitbegr\u00fcndet",
+      "Beitr\u00e4ge zum Manhattan-Projekt"
+    ],
+    influence: "Einer der vielseitigsten Wissenschafter des 20. Jahrhunderts.",
+    image: "portraits/14_John_von_Neumann.jpg"
+  },
+  {
+    name: "Alan Turing",
+    years: "1912\u20131954",
+    field: "Informatik & Mathematik",
+    bio: "Britischer Logiker und Codebreaker.",
+    achievements: [
+      "Konzept der Turing-Maschine",
+      "Entschl\u00fcsselung der Enigma im 2. Weltkrieg",
+      "Grundlagen der K\u00fcnstlichen Intelligenz",
+      "Turing-Test zur Bewertung von KI"
+    ],
+    influence: "Schuf das theoretische Fundament der Informatik.",
+    image: "portraits/10_Alan_Turing.jpg"
+  },
+  {
+    name: "James Watson",
+    years: "geb. 1928",
+    field: "Molekularbiologie",
+    bio: "US-amerikanischer Molekularbiologe.",
+    achievements: [
+      "Entdeckung der Doppelhelix-Struktur der DNA",
+      "Zusammenarbeit mit Francis Crick",
+      "Leitung des Humangenomprojekts",
+      "Nobelpreis f\u00fcr Medizin 1962"
+    ],
+    influence: "Legte den Grundstein der modernen Genetik.",
+    image: "portraits/11_James_Watson.jpg"
+  },
+  {
+    name: "Stephen Hawking",
+    years: "1942\u20132018",
+    field: "Astrophysik",
+    bio: "Britischer Kosmologe und Bestsellerautor.",
+    achievements: [
+      "Theorie der Hawking-Strahlung",
+      "Forschung zu Schwarzen L\u00f6chern",
+      "Singularit\u00e4tentheoreme (mit Penrose)",
+      "Bestseller: Eine kurze Geschichte der Zeit"
+    ],
+    influence: "Popularisierte die Kosmologie weltweit.",
+    image: "portraits/12_Stephen_Hawking.jpg"
+  }
+];
+
+let current = 0;
+const container = document.getElementById('slideshow');
+const dotsContainer = document.getElementById('dots');
+const counter = document.getElementById('counter');
+const totalSlides = scientists.length + 1;
+
+// Titel-Slide
+const titleSlide = document.createElement('div');
+titleSlide.className = 'slide slide-title active';
+titleSlide.innerHTML = `
+  <h1>Die 15 gr\u00f6\u00dften Wissenschafter<br>der Neuzeit</h1>
+  <p>Eine Reise durch die Geschichte der Wissenschaft</p>
+`;
+container.appendChild(titleSlide);
+
+// Wissenschafter-Slides
+scientists.forEach((s, i) => {
+  const slide = document.createElement('div');
+  slide.className = 'slide slide-scientist';
+  slide.innerHTML = `
+    <div class="slide-image">
+      <img src="${s.image}" alt="${s.name}" loading="lazy">
+    </div>
+    <div class="slide-content">
+      <div class="slide-number">Wissenschafter ${i + 1} von 15</div>
+      <h2>${s.name}</h2>
+      <div class="field">${s.field}</div>
+      <div class="dates">${s.years}</div>
+      <div class="bio">${s.bio}</div>
+      <ul class="achievements">
+        ${s.achievements.map(a => `<li>${a}</li>`).join('')}
+      </ul>
+      <div class="influence">\u201E${s.influence}\u201C</div>
+    </div>
+  `;
+  container.appendChild(slide);
+});
+
+// Dots
+for (let i = 0; i < totalSlides; i++) {
+  const dot = document.createElement('div');
+  dot.className = 'dot' + (i === 0 ? ' active' : '');
+  dot.addEventListener('click', () => goTo(i));
+  dotsContainer.appendChild(dot);
+}
+
+function updateCounter() {
+  counter.textContent = `${current + 1} / ${totalSlides}`;
+}
+
+function goTo(index) {
+  const slides = container.querySelectorAll('.slide');
+  const dots = dotsContainer.querySelectorAll('.dot');
+  slides[current].classList.remove('active');
+  dots[current].classList.remove('active');
+  current = (index + totalSlides) % totalSlides;
+  slides[current].classList.add('active');
+  dots[current].classList.add('active');
+  updateCounter();
+}
+
+document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
+document.getElementById('next').addEventListener('click', () => goTo(current + 1));
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+  if (e.key === 'Home') { e.preventDefault(); goTo(0); }
+  if (e.key === 'End') { e.preventDefault(); goTo(totalSlides - 1); }
+});
+
+updateCounter();
+</script>
+</body>
+</html>
