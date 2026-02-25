@@ -1,5 +1,7 @@
 # Die 17 größten Wissenschafter der Neuzeit
 
+**[Live Demo](https://helmutqualtinger.github.io/Wissenschafter/)**
+
 An interactive slideshow presenting 17 of the greatest scientists of the modern era, featuring portraits, biographies, key achievements, and historical influence. Fully responsive — works on desktop and mobile.
 
 ## Languages

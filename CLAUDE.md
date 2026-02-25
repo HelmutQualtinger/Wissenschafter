@@ -20,19 +20,19 @@ Each language version is a self-contained HTML file (~1050 lines) with embedded 
 
 ### Data Structure
 
-Scientists are defined as a JS array of objects with fields: `name`, `years`, `field`, `bio`, `achievements[]`, `influence`, `image`, `symbol`, `flag`. Some entries have special properties (`image2` for Watson & Crick dual-portrait, `svgSymbol` for Shockley's transistor, `logo` for Higgs).
+Scientists are defined as a JS array of objects with fields: `name`, `years`, `field`, `bio`, `achievements[]`, `influence`, `image`, `symbol`, `flag`. Some entries have special properties (`image2` for Watson & Crick dual-portrait, `svgSymbol` for Shockley's transistor, `logo` for Higgs and Furchgott).
 
 ### UI Structure
 
-- **Title slide**: 5-column CSS Grid of all 15 scientists with portraits
-- **Individual slides**: Split layout — 45% image (with gradient overlay, flag emoji) / 55% content
-- **Navigation**: Prev/Next buttons, dot indicators, slide counter, keyboard (arrows, space, Home, End)
+- **Title slide**: 5-column CSS Grid (3 on mobile) of all scientists with portraits
+- **Individual slides**: Split layout — 45% image / 55% content on desktop; stacked vertically on mobile
+- **Navigation**: Prev/Next buttons, dot indicators, slide counter, keyboard (arrows, space, Home, End), swipe gestures on mobile
 
 ### Styling
 
 - Dark theme (`#0a0a1a` background), gold accent (`#d4af37`)
-- Sepia filter on portraits, 0.8s opacity transitions between slides
-- Full-viewport (100vw × 100vh) responsive layout
+- Sepia filter on portraits, 3D carousel transitions on desktop, simple slide switching on mobile
+- Full-viewport responsive layout with `@media (max-width: 768px)` breakpoint
 
 ## Portraits
 
