@@ -6,13 +6,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Interactive HTML/CSS/JavaScript slideshow presenting "The 15 Greatest Scientists of the Modern Era" in three languages (German, English, Italian). Zero-dependency, no build system — just static HTML files.
 
-**Repository:** https://github.com/HelmutQualtinger/Wissenschafter.git
-
 ## Running
 
 Open any HTML file directly in a browser. No build step, no server required.
 
-- `index.html` — German (default, symlinked from slideshow.html)
+- `index.html` — German (default)
 - `index_en.html` — English
 - `index_it.html` — Italian
 
