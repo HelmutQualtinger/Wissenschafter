@@ -19,19 +19,27 @@
     position: relative;
     width: 100vw;
     height: 100vh;
+    perspective: 1200px;
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .slide {
     position: absolute;
     inset: 0;
     display: flex;
-    opacity: 0;
-    transition: opacity 0.8s ease;
+    backface-visibility: hidden;
     pointer-events: none;
   }
 
   .slide.active {
-    opacity: 1;
     pointer-events: auto;
   }
 
@@ -387,10 +395,12 @@ const scientists = [
     field: "Astronomy & Physics",
     bio: "Italian polymath, considered the father of modern astronomy.",
     achievements: [
-      "Discovery of Jupiter's moons",
-      "Observed phases of Venus",
-      "Formulated laws of falling bodies",
-      "Major works: Sidereus Nuncius (1610), Dialogo (1632)"
+      "Discovered Jupiter's four largest moons (Io, Europa, Ganymede, Callisto) with a self-built telescope",
+      "Observed the phases of Venus — key evidence supporting the heliocentric model",
+      "Formulated the laws of falling bodies and the principle of inertia through systematic experiments",
+      "Improved the telescope from 3x to 30x magnification",
+      "Discovered sunspots and mountains on the Moon",
+      "Major works: Sidereus Nuncius (1610), Dialogo (1632), Discorsi (1638)"
     ],
     influence: "Founded the empirical method in science.",
     image: "portraits/01_Galileo_Galilei.jpg",
@@ -403,10 +413,12 @@ const scientists = [
     field: "Astronomy & Mathematics",
     bio: "German mathematician and astronomer.",
     achievements: [
-      "Three Kepler's laws of planetary motion",
-      "Proof of elliptical planetary orbits",
-      "Foundations of modern optics",
-      "Major work: Astronomia Nova (1609)"
+      "Three laws of planetary motion: elliptical orbits, equal areas, and harmonic law",
+      "Proved that planets move in ellipses with the Sun at one focus",
+      "Developed foundations of modern optics, including the theory of refraction",
+      "Compiled the Rudolphine Tables — the most accurate planetary tables of his era",
+      "First to calculate the Earth–Sun distance with remarkable accuracy",
+      "Major works: Astronomia Nova (1609), Harmonices Mundi (1619)"
     ],
     influence: "Laid the mathematical foundation for celestial mechanics.",
     image: "portraits/15_Johannes_Kepler.jpg",
@@ -419,10 +431,12 @@ const scientists = [
     field: "Physics & Mathematics",
     bio: "English physicist and mathematician.",
     achievements: [
-      "Established the law of gravitation",
-      "Formulated three laws of motion",
-      "Developed calculus",
-      "Major work: Principia Mathematica (1687)"
+      "Universal law of gravitation: explained both the falling apple and planetary orbits",
+      "Three laws of motion that founded all of classical mechanics",
+      "Invented calculus (independently of Leibniz) as a mathematical tool",
+      "Decomposed white light into its color spectrum using a prism",
+      "Built the first reflecting telescope (Newtonian telescope)",
+      "Major work: Philosophiae Naturalis Principia Mathematica (1687)"
     ],
     influence: "Created the foundation of classical mechanics.",
     image: "portraits/02_Isaac_Newton.jpg",
@@ -435,10 +449,12 @@ const scientists = [
     field: "Biology & Natural History",
     bio: "British naturalist, famous voyage on HMS Beagle.",
     achievements: [
-      "Theory of evolution by natural selection",
-      "Comprehensive studies on speciation",
-      "Foundations of modern biology",
-      "Major work: On the Origin of Species (1859)"
+      "Theory of evolution by natural selection — the central explanatory principle of biology",
+      "Five-year research voyage on HMS Beagle (1831–1836), including the Galápagos Islands",
+      "Comprehensive studies on speciation, variation, and common descent of all living things",
+      "Researched co-evolution of orchids and pollinators as well as coral reef formation",
+      "Developed the theory of sexual selection to explain secondary sexual characteristics",
+      "Major works: On the Origin of Species (1859), The Descent of Man (1871)"
     ],
     influence: "Laid the cornerstone of modern biology.",
     image: "portraits/03_Charles_Darwin.jpg",
@@ -451,9 +467,11 @@ const scientists = [
     field: "Theoretical Physics",
     bio: "Scottish physicist.",
     achievements: [
-      "Maxwell's equations of electromagnetism",
-      "Co-developed kinetic gas theory",
-      "Demonstrated first color photography",
+      "Four Maxwell equations: unified electricity, magnetism, and optics into one theory",
+      "Predicted electromagnetic waves and identified light as electromagnetic radiation",
+      "Co-developed kinetic gas theory, including the Maxwell–Boltzmann distribution",
+      "Demonstrated the first color photograph (1861) using a three-color process",
+      "Pioneered the first statistical approach in physics — paving the way for statistical mechanics",
       "Major work: A Treatise on Electricity and Magnetism (1873)"
     ],
     influence: "Unified electricity, magnetism and light; basis for the theory of relativity.",
@@ -467,10 +485,12 @@ const scientists = [
     field: "Chemistry",
     bio: "German chemist, controversial pioneer of chemical industry.",
     achievements: [
-      "Haber-Bosch process for ammonia synthesis",
-      "Enabled industrial fertilizer production",
-      "Nobel Prize for Chemistry 1918",
-      "One third of world food production relies on his process"
+      "Haber-Bosch process: synthesis of ammonia from atmospheric nitrogen under high pressure and heat",
+      "Enabled industrial mass production of synthetic fertilizer from 1913",
+      "Nobel Prize for Chemistry 1918 — one of the most controversial Nobel awards in history",
+      "Roughly half the world's population depends on his process for food production today",
+      "Pioneer of chemical weapons in World War I — a deeply controversial legacy",
+      "Influenced the entire large-scale chemical industry of the 20th century"
     ],
     influence: "His process feeds nearly half the world's population today.",
     image: "portraits/13_Fritz_Haber.jpg",
@@ -483,10 +503,12 @@ const scientists = [
     field: "Radio Technology & Electrical Engineering",
     bio: "Italian inventor and electrical engineer.",
     achievements: [
-      "First wireless radio transmission across the Atlantic (1901)",
-      "Development of practical radio systems",
-      "Nobel Prize for Physics 1909",
-      "Foundation of modern telecommunications"
+      "First wireless radio transmission across the Atlantic from Cornwall to Newfoundland (1901)",
+      "Developed practical radio systems for maritime and military communication",
+      "Nobel Prize for Physics 1909 (shared with Karl Ferdinand Braun)",
+      "Founded the first commercial wireless telegraphy company (Marconi Company)",
+      "Enabled the rescue of Titanic survivors through radio distress calls (1912)",
+      "Laid the foundation for radio, television, and all wireless communication"
     ],
     influence: "Enabled wireless communication and changed the world.",
     image: "portraits/16_Guglielmo_Marconi.jpg",
@@ -499,10 +521,12 @@ const scientists = [
     field: "Theoretical Physics",
     bio: "German-American physicist.",
     achievements: [
-      "Special and General Theory of Relativity",
-      "Mass-energy equivalence: E=mc\u00b2",
-      "Explanation of the photoelectric effect",
-      "Nobel Prize for Physics 1921"
+      "Special theory of relativity (1905): space and time are relative, the speed of light is absolute",
+      "General theory of relativity (1915): gravity as curvature of spacetime",
+      "Mass-energy equivalence E=mc² — the most famous equation in physics",
+      "Explanation of the photoelectric effect: light consists of quanta (photons)",
+      "Nobel Prize for Physics 1921; Annus Mirabilis 1905 with four groundbreaking papers",
+      "Predicted gravitational waves, first directly detected in 2015 (LIGO)"
     ],
     influence: "Revolutionized our understanding of space and time.",
     image: "portraits/07_Albert_Einstein.jpg",
@@ -515,10 +539,12 @@ const scientists = [
     field: "Medicine & Microbiology",
     bio: "Scottish physician and microbiologist.",
     achievements: [
-      "Discovery of penicillin (1928)",
-      "First antibiotic in history",
-      "Discovery of lysozyme",
-      "Nobel Prize for Medicine 1945"
+      "Accidental discovery of penicillin from a contaminated bacterial culture (1928)",
+      "First effective antibiotic in history — saved millions of lives",
+      "Discovery of lysozyme, a natural antibacterial enzyme (1923)",
+      "Nobel Prize for Medicine 1945 (shared with Florey and Chain, who scaled penicillin to mass production)",
+      "Warned early about antibiotic resistance from overuse",
+      "Penicillin was first used in World War II to treat wounded soldiers"
     ],
     influence: "Founded the age of antibiotics.",
     image: "portraits/08_Alexander_Fleming.jpg",
@@ -531,10 +557,12 @@ const scientists = [
     field: "Atomic Physics",
     bio: "Danish physicist.",
     achievements: [
-      "Developed the Bohr atomic model",
-      "Contributions to quantum theory",
-      "Formulated the complementarity principle",
-      "Nobel Prize for Physics 1922"
+      "Bohr atomic model (1913): electrons orbit the nucleus at fixed energy levels",
+      "Major contributions to the Copenhagen interpretation of quantum mechanics",
+      "Complementarity principle: wave and particle are two sides of the same reality",
+      "Nobel Prize for Physics 1922 for his work on atomic structure",
+      "Explained hydrogen spectral lines with his model of quantized orbits",
+      "Directed the Niels Bohr Institute in Copenhagen — meeting place for the era's greatest physicists"
     ],
     influence: "Central to understanding atomic structure.",
     image: "portraits/09_Niels_Bohr.jpg",
@@ -547,10 +575,12 @@ const scientists = [
     field: "Mathematics & Computer Science",
     bio: "Hungarian-American mathematician, physicist and computer scientist.",
     achievements: [
-      "Von Neumann architecture of modern computers",
-      "Mathematical foundations of quantum mechanics",
-      "Co-founded game theory",
-      "Contributions to the Manhattan Project"
+      "Von Neumann architecture: the fundamental design of virtually all modern computers (stored program)",
+      "Rigorously formulated the mathematical foundations of quantum mechanics in his 1932 work",
+      "Co-founded game theory — revolutionized economics and strategic research",
+      "Critical contributions to the Manhattan Project, especially the implosion method",
+      "Developed the Monte Carlo method for numerical simulations",
+      "Contributions to set theory, ergodic theory, operator algebras, and cellular automata"
     ],
     influence: "One of the most versatile scientists of the 20th century.",
     image: "portraits/14_John_von_Neumann.jpg",
@@ -563,10 +593,12 @@ const scientists = [
     field: "Semiconductor Physics",
     bio: "American physicist, inventor of the transistor (with Bardeen & Brattain).",
     achievements: [
-      "Invention of the junction transistor (1948)",
-      "Foundation of modern electronics and digital technology",
-      "Nobel Prize for Physics 1956 (with Bardeen & Brattain)",
-      "Founder of Shockley Semiconductor Laboratory"
+      "Invention of the junction transistor (1948) — more reliable and scalable than the point-contact type",
+      "Foundation of all modern electronics: from radios to supercomputers",
+      "Nobel Prize for Physics 1956 (shared with Bardeen & Brattain)",
+      "Founded Shockley Semiconductor Laboratory in Mountain View — the seed of Silicon Valley",
+      "His former employees ('Traitorous Eight') founded Fairchild Semiconductor and later Intel",
+      "Enabled the miniaturization of electronics and thus the digital revolution"
     ],
     influence: "The transistor enabled the digital revolution.",
     image: "portraits/18_William_Shockley.jpg",
@@ -580,10 +612,12 @@ const scientists = [
     field: "Computer Science & Mathematics",
     bio: "British logician and codebreaker.",
     achievements: [
-      "Concept of the Turing machine",
-      "Breaking the Enigma code in World War II",
-      "Foundations of artificial intelligence",
-      "Turing test for evaluating AI"
+      "Concept of the Turing machine (1936) — the theoretical model for all programmable computers",
+      "Broke the German Enigma codes at Bletchley Park, shortening the war by an estimated two years",
+      "Designed the Bombe, an electromechanical machine for systematically cracking Enigma",
+      "Foundations of artificial intelligence: asked 'Can machines think?' in his seminal 1950 paper",
+      "Turing test: a criterion for evaluating machine intelligence, still relevant today",
+      "Pioneering contributions to morphogenesis — mathematical models of biological pattern formation"
     ],
     influence: "Created the theoretical foundation of computer science.",
     image: "portraits/10_Alan_Turing.jpg",
@@ -596,10 +630,12 @@ const scientists = [
     field: "Molecular Biology",
     bio: "James Watson (US) and Francis Crick (UK) together deciphered the structure of DNA.",
     achievements: [
-      "Discovery of the double helix structure of DNA (1953)",
-      "Based on X-ray data from Rosalind Franklin",
-      "Led the Human Genome Project (Watson)",
-      "Nobel Prize for Medicine 1962"
+      "Discovered the double helix structure of DNA on February 28, 1953 at the Cavendish Laboratory",
+      "Based on the crucial X-ray diffraction data (Photo 51) from Rosalind Franklin",
+      "Explained the mechanism of DNA replication through complementary base pairing (A-T, G-C)",
+      "Watson led the Human Genome Project (1990–2003), mapping the entire human genome",
+      "Nobel Prize for Medicine 1962 (shared with Maurice Wilkins)",
+      "Their discovery founded molecular biology and revolutionized medicine and forensics"
     ],
     influence: "Laid the foundation of modern genetics.",
     image: "portraits/11_James_Watson.jpg",
@@ -613,10 +649,12 @@ const scientists = [
     field: "Theoretical Physics",
     bio: "British physicist, discoverer of the Higgs mechanism.",
     achievements: [
-      "Prediction of the Higgs boson (1964)",
-      "Explanation of the mass of elementary particles",
-      "Confirmed at CERN by the LHC (2012)",
-      "Nobel Prize for Physics 2013"
+      "Theoretical prediction of the Higgs boson and the Higgs field (1964)",
+      "Explained why elementary particles have mass — through interaction with the Higgs field",
+      "Confirmed at CERN by the Large Hadron Collider on July 4, 2012 after decades of searching",
+      "Nobel Prize for Physics 2013 (shared with François Englert)",
+      "Completed the Standard Model of particle physics — the last missing particle",
+      "The Higgs boson became known as the 'God particle' — a nickname Higgs himself disliked"
     ],
     influence: "Completed the Standard Model of particle physics.",
     image: "portraits/17_Peter_Higgs.jpg",
@@ -631,6 +669,13 @@ const container = document.getElementById('slideshow');
 const dotsContainer = document.getElementById('dots');
 const counter = document.getElementById('counter');
 const totalSlides = scientists.length + 1;
+const anglePerSlide = 360 / totalSlides;
+const radius = Math.round((window.innerWidth / 2) / Math.tan(Math.PI / totalSlides));
+
+// Carousel track
+const track = document.createElement('div');
+track.className = 'carousel-track';
+container.appendChild(track);
 
 // Titel-Slide
 const titleSlide = document.createElement('div');
@@ -652,7 +697,7 @@ titleSlide.innerHTML = `
   <p>A Journey Through the History of Science</p>
   <div class="title-grid">${gridCards}</div>
 `;
-container.appendChild(titleSlide);
+track.appendChild(titleSlide);
 
 // Wissenschafter-Slides
 scientists.forEach((s, i) => {
@@ -701,8 +746,15 @@ scientists.forEach((s, i) => {
       <div class="influence">\u201E${s.influence}\u201C</div>
     </div>
   `;
-  container.appendChild(slide);
+  track.appendChild(slide);
 });
+
+// Position slides on 3D carousel
+const slides = track.querySelectorAll('.slide');
+slides.forEach((slide, i) => {
+  slide.style.transform = `rotateY(${i * anglePerSlide}deg) translateZ(${radius}px)`;
+});
+track.style.transform = `translateZ(${-radius}px) rotateY(0deg)`;
 
 // Dots
 for (let i = 0; i < totalSlides; i++) {
@@ -717,13 +769,14 @@ function updateCounter() {
 }
 
 function goTo(index) {
-  const slides = container.querySelectorAll('.slide');
+  const allSlides = track.querySelectorAll('.slide');
   const dots = dotsContainer.querySelectorAll('.dot');
-  slides[current].classList.remove('active');
+  allSlides[current].classList.remove('active');
   dots[current].classList.remove('active');
   current = (index + totalSlides) % totalSlides;
-  slides[current].classList.add('active');
+  allSlides[current].classList.add('active');
   dots[current].classList.add('active');
+  track.style.transform = `translateZ(${-radius}px) rotateY(${-current * anglePerSlide}deg)`;
   updateCounter();
 }
 

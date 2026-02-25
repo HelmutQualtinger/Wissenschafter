@@ -19,19 +19,27 @@
     position: relative;
     width: 100vw;
     height: 100vh;
+    perspective: 1200px;
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .slide {
     position: absolute;
     inset: 0;
     display: flex;
-    opacity: 0;
-    transition: opacity 0.8s ease;
+    backface-visibility: hidden;
     pointer-events: none;
   }
 
   .slide.active {
-    opacity: 1;
     pointer-events: auto;
   }
 
@@ -387,10 +395,12 @@ const scientists = [
     field: "Astronomia e Fisica",
     bio: "Poliedrico italiano, considerato il padre dell'astronomia moderna.",
     achievements: [
-      "Scoperta delle lune di Giove",
-      "Osservazione delle fasi di Venere",
-      "Formulazione delle leggi della caduta dei gravi",
-      "Opere principali: Sidereus Nuncius (1610), Dialogo (1632)"
+      "Scoperta delle quattro grandi lune di Giove (Io, Europa, Ganimede, Callisto) con un telescopio autocostruito",
+      "Osservazione delle fasi di Venere — prova decisiva per il modello eliocentrico",
+      "Formulazione delle leggi della caduta dei gravi e del principio d'inerzia tramite esperimenti sistematici",
+      "Miglioramento del telescopio da 3x a 30x di ingrandimento",
+      "Scoperta delle macchie solari e delle montagne sulla Luna",
+      "Opere principali: Sidereus Nuncius (1610), Dialogo (1632), Discorsi (1638)"
     ],
     influence: "Fond\u00f2 il metodo empirico nella scienza.",
     image: "portraits/01_Galileo_Galilei.jpg",
@@ -403,10 +413,12 @@ const scientists = [
     field: "Astronomia e Matematica",
     bio: "Matematico e astronomo tedesco.",
     achievements: [
-      "Tre leggi di Keplero sul moto planetario",
-      "Dimostrazione delle orbite planetarie ellittiche",
-      "Fondamenti dell'ottica moderna",
-      "Opera principale: Astronomia Nova (1609)"
+      "Tre leggi del moto planetario: orbite ellittiche, legge delle aree e legge armonica",
+      "Dimostrò che i pianeti si muovono su ellissi con il Sole in un fuoco",
+      "Sviluppò i fondamenti dell'ottica moderna, inclusa la teoria della rifrazione",
+      "Compilò le Tavole Rudolfine — le più precise tavole planetarie della sua epoca",
+      "Primo a calcolare la distanza Terra-Sole con notevole precisione",
+      "Opere principali: Astronomia Nova (1609), Harmonices Mundi (1619)"
     ],
     influence: "Pose le basi matematiche della meccanica celeste.",
     image: "portraits/15_Johannes_Kepler.jpg",
@@ -419,10 +431,12 @@ const scientists = [
     field: "Fisica e Matematica",
     bio: "Fisico e matematico inglese.",
     achievements: [
-      "Formulazione della legge di gravitazione",
-      "Tre leggi del moto",
-      "Sviluppo del calcolo infinitesimale",
-      "Opera principale: Principia Mathematica (1687)"
+      "Legge di gravitazione universale: spiegò sia la caduta della mela che le orbite planetarie",
+      "Tre leggi del moto che fondarono l'intera meccanica classica",
+      "Inventò il calcolo infinitesimale (indipendentemente da Leibniz) come strumento matematico",
+      "Scompose la luce bianca nel suo spettro cromatico utilizzando un prisma",
+      "Costruì il primo telescopio riflettore (telescopio newtoniano)",
+      "Opera principale: Philosophiae Naturalis Principia Mathematica (1687)"
     ],
     influence: "Cre\u00f2 le fondamenta della meccanica classica.",
     image: "portraits/02_Isaac_Newton.jpg",
@@ -435,10 +449,12 @@ const scientists = [
     field: "Biologia e Storia Naturale",
     bio: "Naturalista britannico, celebre viaggio sulla HMS Beagle.",
     achievements: [
-      "Teoria dell'evoluzione per selezione naturale",
-      "Studi approfonditi sulla speciazione",
-      "Fondamenti della biologia moderna",
-      "Opera principale: On the Origin of Species (1859)"
+      "Teoria dell'evoluzione per selezione naturale — il principio esplicativo centrale della biologia",
+      "Viaggio di ricerca di cinque anni sulla HMS Beagle (1831–1836), incluse le Isole Galápagos",
+      "Studi approfonditi sulla speciazione, la variazione e la discendenza comune di tutti gli esseri viventi",
+      "Studiò la coevoluzione di orchidee e impollinatori e la formazione delle barriere coralline",
+      "Sviluppò la teoria della selezione sessuale per spiegare i caratteri sessuali secondari",
+      "Opere principali: On the Origin of Species (1859), The Descent of Man (1871)"
     ],
     influence: "Pose le basi della biologia moderna.",
     image: "portraits/03_Charles_Darwin.jpg",
@@ -451,9 +467,11 @@ const scientists = [
     field: "Fisica Teorica",
     bio: "Fisico scozzese.",
     achievements: [
-      "Equazioni di Maxwell dell'elettromagnetismo",
-      "Co-sviluppo della teoria cinetica dei gas",
-      "Prima fotografia a colori",
+      "Quattro equazioni di Maxwell: unificarono elettricità, magnetismo e ottica in un'unica teoria",
+      "Previde le onde elettromagnetiche e identificò la luce come radiazione elettromagnetica",
+      "Co-sviluppò la teoria cinetica dei gas, inclusa la distribuzione Maxwell-Boltzmann",
+      "Dimostrò la prima fotografia a colori (1861) con procedimento tricromatico",
+      "Pioniere del primo approccio statistico in fisica — precursore della meccanica statistica",
       "Opera principale: A Treatise on Electricity and Magnetism (1873)"
     ],
     influence: "Unific\u00f2 elettricit\u00e0, magnetismo e luce; base per la teoria della relativit\u00e0.",
@@ -467,10 +485,12 @@ const scientists = [
     field: "Chimica",
     bio: "Chimico tedesco, controverso pioniere dell'industria chimica.",
     achievements: [
-      "Processo Haber-Bosch per la sintesi dell'ammoniaca",
-      "Rese possibile la produzione industriale di fertilizzanti",
-      "Premio Nobel per la Chimica 1918",
-      "Un terzo della produzione alimentare mondiale si basa sul suo processo"
+      "Processo Haber-Bosch: sintesi dell'ammoniaca dall'azoto atmosferico ad alta pressione e temperatura",
+      "Rese possibile la produzione industriale di massa di fertilizzanti sintetici dal 1913",
+      "Premio Nobel per la Chimica 1918 — uno dei premi Nobel più controversi della storia",
+      "Circa metà della popolazione mondiale dipende oggi dal suo processo per l'alimentazione",
+      "Pioniere delle armi chimiche nella Prima Guerra Mondiale — un'eredità eticamente molto controversa",
+      "Influenzò l'intera industria chimica su larga scala del XX secolo"
     ],
     influence: "Il suo processo nutre oggi quasi met\u00e0 della popolazione mondiale.",
     image: "portraits/13_Fritz_Haber.jpg",
@@ -483,10 +503,12 @@ const scientists = [
     field: "Radiotecnica e Ingegneria Elettrica",
     bio: "Inventore e ingegnere elettrico italiano.",
     achievements: [
-      "Prima trasmissione radio senza fili attraverso l'Atlantico (1901)",
-      "Sviluppo di sistemi radio pratici",
-      "Premio Nobel per la Fisica 1909",
-      "Fondamento delle telecomunicazioni moderne"
+      "Prima trasmissione radio senza fili attraverso l'Atlantico dalla Cornovaglia a Terranova (1901)",
+      "Sviluppo di sistemi radio pratici per la navigazione marittima e la comunicazione militare",
+      "Premio Nobel per la Fisica 1909 (condiviso con Karl Ferdinand Braun)",
+      "Fondò la prima compagnia commerciale di telegrafia senza fili (Marconi Company)",
+      "Rese possibile il salvataggio dei sopravvissuti del Titanic tramite chiamata radio d'emergenza (1912)",
+      "Pose le basi per radio, televisione e tutte le comunicazioni senza fili"
     ],
     influence: "Rese possibile la comunicazione senza fili e cambi\u00f2 il mondo.",
     image: "portraits/16_Guglielmo_Marconi.jpg",
@@ -499,10 +521,12 @@ const scientists = [
     field: "Fisica Teorica",
     bio: "Fisico tedesco-americano.",
     achievements: [
-      "Teoria della Relativit\u00e0 Speciale e Generale",
-      "Equivalenza massa-energia: E=mc\u00b2",
-      "Spiegazione dell'effetto fotoelettrico",
-      "Premio Nobel per la Fisica 1921"
+      "Teoria della relatività speciale (1905): spazio e tempo sono relativi, la velocità della luce è assoluta",
+      "Teoria della relatività generale (1915): la gravità come curvatura dello spaziotempo",
+      "Equivalenza massa-energia E=mc² — la formula più famosa della fisica",
+      "Spiegazione dell'effetto fotoelettrico: la luce è composta da quanti (fotoni)",
+      "Premio Nobel per la Fisica 1921; Annus Mirabilis 1905 con quattro lavori rivoluzionari",
+      "Previde le onde gravitazionali, rilevate direttamente solo nel 2015 (LIGO)"
     ],
     influence: "Rivoluzion\u00f2 la nostra comprensione dello spazio e del tempo.",
     image: "portraits/07_Albert_Einstein.jpg",
@@ -515,10 +539,12 @@ const scientists = [
     field: "Medicina e Microbiologia",
     bio: "Medico e microbiologo scozzese.",
     achievements: [
-      "Scoperta della penicillina (1928)",
-      "Primo antibiotico della storia",
-      "Scoperta del lisozima",
-      "Premio Nobel per la Medicina 1945"
+      "Scoperta accidentale della penicillina da una coltura batterica contaminata (1928)",
+      "Primo antibiotico efficace della storia — salvò milioni di vite",
+      "Scoperta del lisozima, un enzima antibatterico naturale (1923)",
+      "Premio Nobel per la Medicina 1945 (condiviso con Florey e Chain, che portarono la penicillina alla produzione di massa)",
+      "Avvertì precocemente del rischio di resistenza agli antibiotici per uso eccessivo",
+      "La penicillina fu usata per la prima volta nella Seconda Guerra Mondiale per curare i soldati feriti"
     ],
     influence: "Fond\u00f2 l'era degli antibiotici.",
     image: "portraits/08_Alexander_Fleming.jpg",
@@ -531,10 +557,12 @@ const scientists = [
     field: "Fisica Atomica",
     bio: "Fisico danese.",
     achievements: [
-      "Sviluppo del modello atomico di Bohr",
-      "Contributi alla teoria quantistica",
-      "Formulazione del principio di complementarit\u00e0",
-      "Premio Nobel per la Fisica 1922"
+      "Modello atomico di Bohr (1913): gli elettroni orbitano attorno al nucleo a livelli energetici fissi",
+      "Contributi fondamentali all'interpretazione di Copenaghen della meccanica quantistica",
+      "Principio di complementarità: onda e particella sono due aspetti della stessa realtà",
+      "Premio Nobel per la Fisica 1922 per i suoi lavori sulla struttura atomica",
+      "Spiegò le righe spettrali dell'idrogeno con il suo modello di orbite quantizzate",
+      "Diresse l'Istituto Niels Bohr a Copenaghen — punto d'incontro dei più grandi fisici dell'epoca"
     ],
     influence: "Fondamentale per la comprensione della struttura atomica.",
     image: "portraits/09_Niels_Bohr.jpg",
@@ -547,10 +575,12 @@ const scientists = [
     field: "Matematica e Informatica",
     bio: "Matematico, fisico e informatico ungherese-americano.",
     achievements: [
-      "Architettura von Neumann dei computer moderni",
-      "Fondamenti matematici della meccanica quantistica",
-      "Co-fondatore della teoria dei giochi",
-      "Contributi al Progetto Manhattan"
+      "Architettura von Neumann: il principio fondamentale di praticamente tutti i computer moderni (programma memorizzato)",
+      "Formulò rigorosamente i fondamenti matematici della meccanica quantistica nella sua opera del 1932",
+      "Co-fondatore della teoria dei giochi — rivoluzionò l'economia e la ricerca strategica",
+      "Contributi decisivi al Progetto Manhattan, in particolare al metodo dell'implosione",
+      "Sviluppò il metodo Monte Carlo per le simulazioni numeriche",
+      "Contributi alla teoria degli insiemi, teoria ergodica, algebre degli operatori e automi cellulari"
     ],
     influence: "Uno degli scienziati pi\u00f9 versatili del XX secolo.",
     image: "portraits/14_John_von_Neumann.jpg",
@@ -563,10 +593,12 @@ const scientists = [
     field: "Fisica dei Semiconduttori",
     bio: "Fisico americano, inventore del transistor (con Bardeen e Brattain).",
     achievements: [
-      "Invenzione del transistor a giunzione (1948)",
-      "Base dell'elettronica moderna e della tecnologia digitale",
-      "Premio Nobel per la Fisica 1956 (con Bardeen e Brattain)",
-      "Fondatore del Shockley Semiconductor Laboratory"
+      "Invenzione del transistor a giunzione (1948) — più affidabile e scalabile del tipo a contatto puntiforme",
+      "Base di tutta l'elettronica moderna: dalle radio ai supercomputer",
+      "Premio Nobel per la Fisica 1956 (condiviso con Bardeen e Brattain)",
+      "Fondò lo Shockley Semiconductor Laboratory a Mountain View — il seme della Silicon Valley",
+      "I suoi ex collaboratori ('Traitorous Eight') fondarono Fairchild Semiconductor e poi Intel",
+      "Rese possibile la miniaturizzazione dell'elettronica e quindi la rivoluzione digitale"
     ],
     influence: "Il transistor rese possibile la rivoluzione digitale.",
     image: "portraits/18_William_Shockley.jpg",
@@ -580,10 +612,12 @@ const scientists = [
     field: "Informatica e Matematica",
     bio: "Logico e decifratore britannico.",
     achievements: [
-      "Concetto della macchina di Turing",
-      "Decrittazione di Enigma nella Seconda Guerra Mondiale",
-      "Fondamenti dell'intelligenza artificiale",
-      "Test di Turing per la valutazione dell'IA"
+      "Concetto della macchina di Turing (1936) — il modello teorico di tutti i computer programmabili",
+      "Decifrò i codici tedeschi Enigma a Bletchley Park, accorciando la guerra di circa due anni",
+      "Progettò la Bombe, una macchina elettromeccanica per decifrare sistematicamente Enigma",
+      "Fondamenti dell'intelligenza artificiale: chiese 'Le macchine possono pensare?' nel suo articolo del 1950",
+      "Test di Turing: un criterio per valutare l'intelligenza delle macchine, ancora attuale oggi",
+      "Contributi pionieristici alla morfogenesi — modelli matematici della formazione di pattern biologici"
     ],
     influence: "Cre\u00f2 le fondamenta teoriche dell'informatica.",
     image: "portraits/10_Alan_Turing.jpg",
@@ -596,10 +630,12 @@ const scientists = [
     field: "Biologia Molecolare",
     bio: "James Watson (USA) e Francis Crick (GB) decifrarono insieme la struttura del DNA.",
     achievements: [
-      "Scoperta della struttura a doppia elica del DNA (1953)",
-      "Basata sui dati a raggi X di Rosalind Franklin",
-      "Direzione del Progetto Genoma Umano (Watson)",
-      "Premio Nobel per la Medicina 1962"
+      "Scoperta della struttura a doppia elica del DNA il 28 febbraio 1953 al Laboratorio Cavendish",
+      "Basata sui dati cruciali di diffrazione a raggi X (Foto 51) di Rosalind Franklin",
+      "Spiegarono il meccanismo di replicazione del DNA tramite appaiamento complementare delle basi (A-T, G-C)",
+      "Watson diresse il Progetto Genoma Umano (1990–2003), mappando l'intero genoma umano",
+      "Premio Nobel per la Medicina 1962 (condiviso con Maurice Wilkins)",
+      "La loro scoperta fondò la biologia molecolare e rivoluzionò la medicina e la scienza forense"
     ],
     influence: "Posero le basi della genetica moderna.",
     image: "portraits/11_James_Watson.jpg",
@@ -613,10 +649,12 @@ const scientists = [
     field: "Fisica Teorica",
     bio: "Fisico britannico, scopritore del meccanismo di Higgs.",
     achievements: [
-      "Previsione del bosone di Higgs (1964)",
-      "Spiegazione della massa delle particelle elementari",
-      "Confermato al CERN dal LHC (2012)",
-      "Premio Nobel per la Fisica 2013"
+      "Previsione teorica del bosone di Higgs e del campo di Higgs (1964)",
+      "Spiegò perché le particelle elementari hanno massa — tramite l'interazione con il campo di Higgs",
+      "Confermato al CERN dal Large Hadron Collider il 4 luglio 2012 dopo decenni di ricerca",
+      "Premio Nobel per la Fisica 2013 (condiviso con François Englert)",
+      "Completò il Modello Standard della fisica delle particelle — l'ultima particella mancante",
+      "Il bosone di Higgs divenne noto come 'particella di Dio' — un soprannome che Higgs stesso non amava"
     ],
     influence: "Complet\u00f2 il Modello Standard della fisica delle particelle.",
     image: "portraits/17_Peter_Higgs.jpg",
@@ -631,6 +669,13 @@ const container = document.getElementById('slideshow');
 const dotsContainer = document.getElementById('dots');
 const counter = document.getElementById('counter');
 const totalSlides = scientists.length + 1;
+const anglePerSlide = 360 / totalSlides;
+const radius = Math.round((window.innerWidth / 2) / Math.tan(Math.PI / totalSlides));
+
+// Carousel track
+const track = document.createElement('div');
+track.className = 'carousel-track';
+container.appendChild(track);
 
 // Titel-Slide
 const titleSlide = document.createElement('div');
@@ -652,7 +697,7 @@ titleSlide.innerHTML = `
   <p>Un viaggio nella storia della scienza</p>
   <div class="title-grid">${gridCards}</div>
 `;
-container.appendChild(titleSlide);
+track.appendChild(titleSlide);
 
 // Wissenschafter-Slides
 scientists.forEach((s, i) => {
@@ -701,8 +746,15 @@ scientists.forEach((s, i) => {
       <div class="influence">\u201E${s.influence}\u201C</div>
     </div>
   `;
-  container.appendChild(slide);
+  track.appendChild(slide);
 });
+
+// Position slides on 3D carousel
+const slides = track.querySelectorAll('.slide');
+slides.forEach((slide, i) => {
+  slide.style.transform = `rotateY(${i * anglePerSlide}deg) translateZ(${radius}px)`;
+});
+track.style.transform = `translateZ(${-radius}px) rotateY(0deg)`;
 
 // Dots
 for (let i = 0; i < totalSlides; i++) {
@@ -717,13 +769,14 @@ function updateCounter() {
 }
 
 function goTo(index) {
-  const slides = container.querySelectorAll('.slide');
+  const allSlides = track.querySelectorAll('.slide');
   const dots = dotsContainer.querySelectorAll('.dot');
-  slides[current].classList.remove('active');
+  allSlides[current].classList.remove('active');
   dots[current].classList.remove('active');
   current = (index + totalSlides) % totalSlides;
-  slides[current].classList.add('active');
+  allSlides[current].classList.add('active');
   dots[current].classList.add('active');
+  track.style.transform = `translateZ(${-radius}px) rotateY(${-current * anglePerSlide}deg)`;
   updateCounter();
 }
 

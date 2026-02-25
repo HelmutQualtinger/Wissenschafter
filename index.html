@@ -19,19 +19,27 @@
     position: relative;
     width: 100vw;
     height: 100vh;
+    perspective: 1200px;
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .slide {
     position: absolute;
     inset: 0;
     display: flex;
-    opacity: 0;
-    transition: opacity 0.8s ease;
+    backface-visibility: hidden;
     pointer-events: none;
   }
 
   .slide.active {
-    opacity: 1;
     pointer-events: auto;
   }
 
@@ -387,10 +395,12 @@ const scientists = [
     field: "Astronomie & Physik",
     bio: "Italienischer Polymath, gilt als Vater der modernen Astronomie.",
     achievements: [
-      "Entdeckung der Jupitermonde",
-      "Phasen der Venus beobachtet",
-      "Fallgesetze formuliert",
-      "Hauptwerke: Sidereus Nuncius (1610), Dialogo (1632)"
+      "Entdeckung der vier großen Jupitermonde (Io, Europa, Ganymed, Kallisto) mit einem selbstgebauten Teleskop",
+      "Beobachtung der Venusphasen — ein entscheidender Beweis für das heliozentrische Weltbild",
+      "Formulierung der Fallgesetze und des Trägheitsprinzips durch systematische Experimente",
+      "Verbesserung des Fernrohrs von 3-facher auf 30-fache Vergrößerung",
+      "Entdeckung der Sonnenflecken und der Gebirge auf dem Mond",
+      "Hauptwerke: Sidereus Nuncius (1610), Dialogo (1632), Discorsi (1638)"
     ],
     influence: "Begr\u00fcndete die empirische Methode in der Wissenschaft.",
     image: "portraits/01_Galileo_Galilei.jpg",
@@ -403,10 +413,12 @@ const scientists = [
     field: "Astronomie & Mathematik",
     bio: "Deutscher Mathematiker und Astronom.",
     achievements: [
-      "Drei Keplersche Gesetze der Planetenbewegung",
-      "Beweis der elliptischen Planetenbahnen",
-      "Grundlagen der modernen Optik",
-      "Hauptwerk: Astronomia Nova (1609)"
+      "Drei Keplersche Gesetze: elliptische Bahnen, Flächensatz und harmonisches Gesetz",
+      "Bewies, dass Planeten sich auf Ellipsen mit der Sonne in einem Brennpunkt bewegen",
+      "Entwickelte die Grundlagen der modernen Optik, einschließlich der Theorie der Lichtbrechung",
+      "Erstellte die Rudolphinischen Tafeln — die genauesten Planetentabellen seiner Zeit",
+      "Berechnete erstmals die Entfernung Erde–Sonne mit bemerkenswerter Genauigkeit",
+      "Hauptwerke: Astronomia Nova (1609), Harmonices Mundi (1619)"
     ],
     influence: "Legte das mathematische Fundament f\u00fcr die Himmelsmechanik.",
     image: "portraits/15_Johannes_Kepler.jpg",
@@ -419,10 +431,12 @@ const scientists = [
     field: "Physik & Mathematik",
     bio: "Englischer Physiker und Mathematiker.",
     achievements: [
-      "Gravitationsgesetz aufgestellt",
-      "Drei Bewegungsgesetze formuliert",
-      "Infinitesimalrechnung entwickelt",
-      "Hauptwerk: Principia Mathematica (1687)"
+      "Universelles Gravitationsgesetz: erklärte sowohl den Apfelfall als auch die Planetenbahnen",
+      "Drei Bewegungsgesetze, die die gesamte klassische Mechanik begründeten",
+      "Erfand die Infinitesimalrechnung (unabhängig von Leibniz) als mathematisches Werkzeug",
+      "Zerlegte weißes Licht mit einem Prisma in sein Farbspektrum",
+      "Konstruierte das erste Spiegelteleskop (Newton-Teleskop)",
+      "Hauptwerk: Philosophiae Naturalis Principia Mathematica (1687)"
     ],
     influence: "Schuf das Fundament der klassischen Mechanik.",
     image: "portraits/02_Isaac_Newton.jpg",
@@ -435,10 +449,12 @@ const scientists = [
     field: "Biologie & Naturgeschichte",
     bio: "Britischer Naturforscher, ber\u00fchmte Reise auf der HMS Beagle.",
     achievements: [
-      "Evolutionstheorie durch nat\u00fcrliche Selektion",
-      "Umfassende Studien zur Artbildung",
-      "Grundlagen der modernen Biologie",
-      "Hauptwerk: On the Origin of Species (1859)"
+      "Evolutionstheorie durch natürliche Selektion — das zentrale Erklärungsprinzip der Biologie",
+      "Fünfjährige Forschungsreise auf der HMS Beagle (1831–1836), u.a. Galápagos-Inseln",
+      "Umfassende Studien zur Artbildung, Variation und gemeinsamen Abstammung aller Lebewesen",
+      "Erforschte Koevolution von Orchideen und Bestäubern sowie Korallenriffbildung",
+      "Entwickelte die Theorie der sexuellen Selektion zur Erklärung sekundärer Geschlechtsmerkmale",
+      "Hauptwerk: On the Origin of Species (1859), The Descent of Man (1871)"
     ],
     influence: "Legte den Grundstein der modernen Biologie.",
     image: "portraits/03_Charles_Darwin.jpg",
@@ -451,9 +467,11 @@ const scientists = [
     field: "Theoretische Physik",
     bio: "Schottischer Physiker.",
     achievements: [
-      "Maxwell-Gleichungen des Elektromagnetismus",
-      "Kinetische Gastheorie mitentwickelt",
-      "Erste Farbfotografie demonstriert",
+      "Vier Maxwell-Gleichungen: vereinheitlichten Elektrizität, Magnetismus und Optik in einer Theorie",
+      "Sagte elektromagnetische Wellen vorher und identifizierte Licht als elektromagnetische Strahlung",
+      "Kinetische Gastheorie mitentwickelt, einschließlich der Maxwell-Boltzmann-Verteilung",
+      "Demonstrierte die erste Farbfotografie (1861) mit Dreifarbverfahren",
+      "Erster statistischer Ansatz in der Physik — Wegbereiter der statistischen Mechanik",
       "Hauptwerk: A Treatise on Electricity and Magnetism (1873)"
     ],
     influence: "Vereinheitlichte Elektrizit\u00e4t, Magnetismus und Licht; Basis f\u00fcr die Relativit\u00e4tstheorie.",
@@ -467,10 +485,12 @@ const scientists = [
     field: "Chemie",
     bio: "Deutscher Chemiker, umstrittener Pionier der chemischen Industrie.",
     achievements: [
-      "Haber-Bosch-Verfahren zur Ammoniaksynthese",
-      "Erm\u00f6glichte industrielle D\u00fcngemittelproduktion",
-      "Nobelpreis f\u00fcr Chemie 1918",
-      "Ein Drittel der Weltern\u00e4hrung basiert auf seinem Verfahren"
+      "Haber-Bosch-Verfahren: Synthese von Ammoniak aus Luftstickstoff unter Hochdruck und Hitze",
+      "Ermöglichte die industrielle Massenproduktion von Kunstdünger ab 1913",
+      "Nobelpreis für Chemie 1918 — eine der umstrittensten Nobelpreis-Vergaben der Geschichte",
+      "Etwa die Hälfte der Weltbevölkerung ist heute auf sein Verfahren zur Ernährung angewiesen",
+      "Pionier der Gaswaffen im Ersten Weltkrieg — ethisch höchst umstrittenes Vermächtnis",
+      "Beeinflusste die gesamte chemische Großindustrie des 20. Jahrhunderts"
     ],
     influence: "Sein Verfahren ern\u00e4hrt heute fast die H\u00e4lfte der Weltbev\u00f6lkerung.",
     image: "portraits/13_Fritz_Haber.jpg",
@@ -483,10 +503,12 @@ const scientists = [
     field: "Funktechnik & Elektrotechnik",
     bio: "Italienischer Erfinder und Elektroingenieur.",
     achievements: [
-      "Erste drahtlose Funk\u00fcbertragung \u00fcber den Atlantik (1901)",
-      "Entwicklung praxistauglicher Radiosysteme",
-      "Nobelpreis f\u00fcr Physik 1909",
-      "Grundstein der modernen Telekommunikation"
+      "Erste drahtlose Funkübertragung über den Atlantik von Cornwall nach Neufundland (1901)",
+      "Entwicklung praxistauglicher Radiosysteme für Schifffahrt und militärische Kommunikation",
+      "Nobelpreis für Physik 1909 (gemeinsam mit Karl Ferdinand Braun)",
+      "Gründete die erste kommerzielle Funktelegrafie-Gesellschaft (Marconi Company)",
+      "Ermöglichte die Rettung von Überlebenden der Titanic durch Funknotruf (1912)",
+      "Legte den Grundstein für Radio, Fernsehen und die gesamte drahtlose Kommunikation"
     ],
     influence: "Erm\u00f6glichte die drahtlose Kommunikation und ver\u00e4nderte die Welt.",
     image: "portraits/16_Guglielmo_Marconi.jpg",
@@ -499,10 +521,12 @@ const scientists = [
     field: "Theoretische Physik",
     bio: "Deutsch-amerikanischer Physiker.",
     achievements: [
-      "Spezielle und Allgemeine Relativit\u00e4tstheorie",
-      "Masse-Energie-\u00c4quivalenz: E=mc\u00b2",
-      "Erkl\u00e4rung des Photoelektrischen Effekts",
-      "Nobelpreis f\u00fcr Physik 1921"
+      "Spezielle Relativitätstheorie (1905): Raum und Zeit sind relativ, Lichtgeschwindigkeit ist absolut",
+      "Allgemeine Relativitätstheorie (1915): Gravitation als Krümmung der Raumzeit",
+      "Masse-Energie-Äquivalenz E=mc² — die berühmteste Formel der Physik",
+      "Erklärung des Photoelektrischen Effekts: Licht besteht aus Quanten (Photonen)",
+      "Nobelpreis für Physik 1921; Annus Mirabilis 1905 mit vier bahnbrechenden Arbeiten",
+      "Sagte Gravitationswellen vorher, die erst 2015 direkt nachgewiesen wurden (LIGO)"
     ],
     influence: "Revolutionierte unser Verst\u00e4ndnis von Raum und Zeit.",
     image: "portraits/07_Albert_Einstein.jpg",
@@ -515,10 +539,12 @@ const scientists = [
     field: "Medizin & Mikrobiologie",
     bio: "Schottischer Arzt und Mikrobiologe.",
     achievements: [
-      "Entdeckung des Penicillins (1928)",
-      "Erstes Antibiotikum der Geschichte",
-      "Entdeckung des Lysozyms",
-      "Nobelpreis f\u00fcr Medizin 1945"
+      "Zufällige Entdeckung des Penicillins durch eine verschimmelte Bakterienkultur (1928)",
+      "Erstes wirksames Antibiotikum der Geschichte — rettete Millionen von Menschenleben",
+      "Entdeckung des Lysozyms, eines natürlichen antibakteriellen Enzyms (1923)",
+      "Nobelpreis für Medizin 1945 (gemeinsam mit Florey und Chain, die Penicillin zur Massenproduktion brachten)",
+      "Warnte früh vor Antibiotikaresistenz durch übermäßigen Gebrauch",
+      "Penicillin wurde erstmals im Zweiten Weltkrieg zur Behandlung verwundeter Soldaten eingesetzt"
     ],
     influence: "Begr\u00fcndete das Zeitalter der Antibiotika.",
     image: "portraits/08_Alexander_Fleming.jpg",
@@ -531,10 +557,12 @@ const scientists = [
     field: "Atomphysik",
     bio: "D\u00e4nischer Physiker.",
     achievements: [
-      "Bohrsches Atommodell entwickelt",
-      "Beitr\u00e4ge zur Quantentheorie",
-      "Komplementarit\u00e4tsprinzip formuliert",
-      "Nobelpreis f\u00fcr Physik 1922"
+      "Bohrsches Atommodell (1913): Elektronen umkreisen den Kern auf festen Energieniveaus",
+      "Wesentliche Beiträge zur Kopenhagener Deutung der Quantenmechanik",
+      "Komplementaritätsprinzip: Welle und Teilchen sind zwei Seiten derselben Realität",
+      "Nobelpreis für Physik 1922 für seine Arbeiten zur Atomstruktur",
+      "Erklärte die Spektrallinien des Wasserstoffs mit seinem Modell quantisierter Bahnen",
+      "Leitete das Niels-Bohr-Institut in Kopenhagen — Treffpunkt der bedeutendsten Physiker seiner Zeit"
     ],
     influence: "Zentral f\u00fcr das Verst\u00e4ndnis des atomaren Aufbaus.",
     image: "portraits/09_Niels_Bohr.jpg",
@@ -547,10 +575,12 @@ const scientists = [
     field: "Mathematik & Informatik",
     bio: "Ungarisch-amerikanischer Mathematiker, Physiker und Informatiker.",
     achievements: [
-      "Von-Neumann-Architektur moderner Computer",
-      "Mathematische Grundlagen der Quantenmechanik",
-      "Spieltheorie mitbegr\u00fcndet",
-      "Beitr\u00e4ge zum Manhattan-Projekt"
+      "Von-Neumann-Architektur: das Grundprinzip praktisch aller modernen Computer (gespeichertes Programm)",
+      "Mathematische Grundlagen der Quantenmechanik in seinem Werk von 1932 rigoros formuliert",
+      "Mitbegründer der Spieltheorie — revolutionierte Wirtschaftswissenschaft und Strategieforschung",
+      "Entscheidende Beiträge zum Manhattan-Projekt, insbesondere zur Implosionsmethode",
+      "Entwickelte die Monte-Carlo-Methode für numerische Simulationen",
+      "Beiträge zu Mengenlehre, Ergodentheorie, Operatoralgebren und zellulären Automaten"
     ],
     influence: "Einer der vielseitigsten Wissenschafter des 20. Jahrhunderts.",
     image: "portraits/14_John_von_Neumann.jpg",
@@ -563,10 +593,12 @@ const scientists = [
     field: "Halbleiterphysik",
     bio: "Amerikanischer Physiker, Erfinder des Transistors (mit Bardeen & Brattain).",
     achievements: [
-      "Erfindung des Sperrschicht-Transistors (1948)",
-      "Grundlage der modernen Elektronik und Digitaltechnik",
-      "Nobelpreis f\u00fcr Physik 1956 (mit Bardeen & Brattain)",
-      "Gr\u00fcnder von Shockley Semiconductor Laboratory"
+      "Erfindung des Sperrschicht-Transistors (1948) — zuverlässiger und skalierbarer als der Punktkontakt-Typ",
+      "Grundlage der gesamten modernen Elektronik: von Radios bis zu Supercomputern",
+      "Nobelpreis für Physik 1956 (gemeinsam mit Bardeen & Brattain)",
+      "Gründer von Shockley Semiconductor Laboratory in Mountain View — Keimzelle des Silicon Valley",
+      "Seine ehemaligen Mitarbeiter ('Traitorous Eight') gründeten Fairchild Semiconductor und später Intel",
+      "Ermöglichte die Miniaturisierung der Elektronik und damit die digitale Revolution"
     ],
     influence: "Der Transistor erm\u00f6glichte die digitale Revolution.",
     image: "portraits/18_William_Shockley.jpg",
@@ -580,10 +612,12 @@ const scientists = [
     field: "Informatik & Mathematik",
     bio: "Britischer Logiker und Codebreaker.",
     achievements: [
-      "Konzept der Turing-Maschine",
-      "Entschl\u00fcsselung der Enigma im 2. Weltkrieg",
-      "Grundlagen der K\u00fcnstlichen Intelligenz",
-      "Turing-Test zur Bewertung von KI"
+      "Konzept der Turing-Maschine (1936) — das theoretische Modell aller programmierbaren Computer",
+      "Entschlüsselung der deutschen Enigma-Codes in Bletchley Park, verkürzte den Krieg um geschätzt zwei Jahre",
+      "Entwarf die Bombe, eine elektromechanische Maschine zum systematischen Knacken der Enigma",
+      "Grundlagen der Künstlichen Intelligenz: stellte 1950 die Frage 'Können Maschinen denken?'",
+      "Turing-Test: ein Kriterium zur Bewertung maschineller Intelligenz, bis heute relevant",
+      "Pionierbeiträge zur Morphogenese — mathematische Modelle biologischer Musterbildung"
     ],
     influence: "Schuf das theoretische Fundament der Informatik.",
     image: "portraits/10_Alan_Turing.jpg",
@@ -596,10 +630,12 @@ const scientists = [
     field: "Molekularbiologie",
     bio: "James Watson (US) und Francis Crick (GB) entschl\u00fcsselten gemeinsam die Struktur der DNA.",
     achievements: [
-      "Entdeckung der Doppelhelix-Struktur der DNA (1953)",
-      "Basierend auf R\u00f6ntgendaten von Rosalind Franklin",
-      "Leitung des Humangenomprojekts (Watson)",
-      "Nobelpreis f\u00fcr Medizin 1962"
+      "Entdeckung der Doppelhelix-Struktur der DNA am 28. Februar 1953 im Cavendish-Labor",
+      "Basierend auf den entscheidenden Röntgenbeugungsdaten (Foto 51) von Rosalind Franklin",
+      "Erklärten den Mechanismus der DNA-Replikation durch komplementäre Basenpaarung (A-T, G-C)",
+      "Watson leitete das Humangenomprojekt (1990–2003), das das gesamte menschliche Genom kartierte",
+      "Nobelpreis für Medizin 1962 (gemeinsam mit Maurice Wilkins)",
+      "Ihre Entdeckung begründete die Molekularbiologie und revolutionierte Medizin und Forensik"
     ],
     influence: "Legten den Grundstein der modernen Genetik.",
     image: "portraits/11_James_Watson.jpg",
@@ -613,10 +649,12 @@ const scientists = [
     field: "Theoretische Physik",
     bio: "Britischer Physiker, Entdecker des Higgs-Mechanismus.",
     achievements: [
-      "Vorhersage des Higgs-Bosons (1964)",
-      "Erkl\u00e4rung der Masse von Elementarteilchen",
-      "Best\u00e4tigung am CERN durch den LHC (2012)",
-      "Nobelpreis f\u00fcr Physik 2013"
+      "Theoretische Vorhersage des Higgs-Bosons und des Higgs-Feldes (1964)",
+      "Erklärte, warum Elementarteilchen Masse besitzen — durch Wechselwirkung mit dem Higgs-Feld",
+      "Bestätigung am CERN durch den Large Hadron Collider am 4. Juli 2012 nach jahrzehntelanger Suche",
+      "Nobelpreis für Physik 2013 (gemeinsam mit François Englert)",
+      "Vervollständigte das Standardmodell der Teilchenphysik — das letzte fehlende Teilchen",
+      "Das Higgs-Boson wurde als 'Gottesteilchen' bekannt — ein Spitzname, den Higgs selbst ablehnte"
     ],
     influence: "Vervollst\u00e4ndigte das Standardmodell der Teilchenphysik.",
     image: "portraits/17_Peter_Higgs.jpg",
@@ -631,6 +669,13 @@ const container = document.getElementById('slideshow');
 const dotsContainer = document.getElementById('dots');
 const counter = document.getElementById('counter');
 const totalSlides = scientists.length + 1;
+const anglePerSlide = 360 / totalSlides;
+const radius = Math.round((window.innerWidth / 2) / Math.tan(Math.PI / totalSlides));
+
+// Carousel track
+const track = document.createElement('div');
+track.className = 'carousel-track';
+container.appendChild(track);
 
 // Titel-Slide
 const titleSlide = document.createElement('div');
@@ -652,7 +697,7 @@ titleSlide.innerHTML = `
   <p>Eine Reise durch die Geschichte der Wissenschaft</p>
   <div class="title-grid">${gridCards}</div>
 `;
-container.appendChild(titleSlide);
+track.appendChild(titleSlide);
 
 // Wissenschafter-Slides
 scientists.forEach((s, i) => {
@@ -701,8 +746,15 @@ scientists.forEach((s, i) => {
       <div class="influence">\u201E${s.influence}\u201C</div>
     </div>
   `;
-  container.appendChild(slide);
+  track.appendChild(slide);
 });
+
+// Position slides on 3D carousel
+const slides = track.querySelectorAll('.slide');
+slides.forEach((slide, i) => {
+  slide.style.transform = `rotateY(${i * anglePerSlide}deg) translateZ(${radius}px)`;
+});
+track.style.transform = `translateZ(${-radius}px) rotateY(0deg)`;
 
 // Dots
 for (let i = 0; i < totalSlides; i++) {
@@ -717,13 +769,14 @@ function updateCounter() {
 }
 
 function goTo(index) {
-  const slides = container.querySelectorAll('.slide');
+  const allSlides = track.querySelectorAll('.slide');
   const dots = dotsContainer.querySelectorAll('.dot');
-  slides[current].classList.remove('active');
+  allSlides[current].classList.remove('active');
   dots[current].classList.remove('active');
   current = (index + totalSlides) % totalSlides;
-  slides[current].classList.add('active');
+  allSlides[current].classList.add('active');
   dots[current].classList.add('active');
+  track.style.transform = `translateZ(${-radius}px) rotateY(${-current * anglePerSlide}deg)`;
   updateCounter();
 }
 
