@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Interactive HTML/CSS/JavaScript slideshow presenting "The 15 Greatest Scientists of the Modern Era" in three languages (German, English, Italian). Zero-dependency, no build system — just static HTML files.
+Interactive HTML/CSS/JavaScript slideshow presenting "The 17 Greatest Scientists of the Modern Era" in three languages (German, English, Italian). Zero-dependency, no build system — just static HTML files. Responsive design for desktop and mobile.
 
 ## Running
 
@@ -16,7 +16,7 @@ Open any HTML file directly in a browser. No build step, no server required.
 
 ## Architecture
 
-Each language version is a self-contained HTML file (~743 lines) with embedded CSS and JS. The three files share identical structure and differ only in translated text.
+Each language version is a self-contained HTML file (~1050 lines) with embedded CSS and JS. The three files share identical structure and differ only in translated text.
 
 ### Data Structure
 
