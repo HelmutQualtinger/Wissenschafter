@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Die 15 gr&ouml;&szlig;ten Wissenschafter der Neuzeit</title>
+<title>Die 17 gr&ouml;&szlig;ten Wissenschafter der Neuzeit</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -444,6 +444,42 @@ const scientists = [
     flag: "\uD83C\uDDEC\uD83C\uDDE7"
   },
   {
+    name: "James Watt",
+    years: "1736\u20131819",
+    field: "Ingenieurwesen & Physik",
+    bio: "Schottischer Erfinder und Ingenieur, dessen Verbesserung der Dampfmaschine die Industrielle Revolution antrieb.",
+    achievements: [
+      "Erfindung des separaten Kondensators (1769) — verdreifachte den Wirkungsgrad der Dampfmaschine",
+      "Partnerschaft mit Matthew Boulton: Massenproduktion verbesserter Dampfmaschinen ab 1775",
+      "Einführung der Maßeinheit Pferdestärke (PS) zum Vergleich von Maschinenleistung",
+      "Entwicklung der doppelt wirkenden Dampfmaschine mit Drehbewegung für industrielle Anwendungen",
+      "Die SI-Einheit der Leistung (Watt) wurde ihm zu Ehren benannt",
+      "Seine Maschinen trieben Fabriken, Bergwerke und Mühlen an und leiteten das Industriezeitalter ein"
+    ],
+    influence: "Seine Dampfmaschine war der Motor der Industriellen Revolution.",
+    image: "portraits/20_James_Watt.jpg",
+    symbol: "🚂",
+    flag: "\uD83C\uDFF4\uDB40\uDC67\uDB40\uDC62\uDB40\uDC73\uDB40\uDC63\uDB40\uDC74\uDB40\uDC7F"
+  },
+  {
+    name: "Carl Friedrich Gau\u00df",
+    years: "1777\u20131855",
+    field: "Mathematik & Physik",
+    bio: "Deutscher Mathematiker, Physiker und Astronom — der \u201EF\u00fcrst der Mathematik\u201C.",
+    achievements: [
+      "Disquisitiones Arithmeticae (1801): Grundlagenwerk der modernen Zahlentheorie",
+      "Entwicklung der Methode der kleinsten Quadrate zur statistischen Datenanalyse",
+      "Die Gau\u00dfsche Normalverteilung (Glockenkurve) — Grundlage der modernen Statistik",
+      "Pionierbeitr\u00e4ge zur nicht-euklidischen Geometrie, die er Jahrzehnte vor anderen erforschte",
+      "Zusammen mit Weber: erstes elektromagnetisches Telegraphensystem (1833)",
+      "Die Einheit der magnetischen Flussdichte (Gau\u00df) tr\u00e4gt seinen Namen"
+    ],
+    influence: "Pr\u00e4gte nahezu jedes Gebiet der Mathematik und mathematischen Physik.",
+    image: "portraits/19_Carl_Friedrich_Gauss.jpg",
+    symbol: "\uD83D\uDCD0",
+    flag: "\uD83C\uDDE9\uD83C\uDDEA"
+  },
+  {
     name: "Charles Darwin",
     years: "1809\u20131882",
     field: "Biologie & Naturgeschichte",
@@ -693,7 +729,7 @@ const gridCards = scientists.map((s, i) => {
   </div>`;
 }).join('');
 titleSlide.innerHTML = `
-  <h1>Die 15 gr\u00f6\u00dften Wissenschafter<br>der Neuzeit</h1>
+  <h1>Die 17 gr\u00f6\u00dften Wissenschafter<br>der Neuzeit</h1>
   <p>Eine Reise durch die Geschichte der Wissenschaft</p>
   <div class="title-grid">${gridCards}</div>
 `;
@@ -735,7 +771,7 @@ scientists.forEach((s, i) => {
   slide.innerHTML = `
     ${imageHTML}
     <div class="slide-content">
-      <div class="slide-number">Wissenschafter ${i + 1} von 15</div>
+      <div class="slide-number">Wissenschafter ${i + 1} von 17</div>
       <h2>${s.name}</h2>
       <div class="field">${s.field}</div>
       <div class="dates">${s.years}</div>

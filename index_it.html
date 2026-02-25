@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>I 15 pi&ugrave; grandi scienziati dell'era moderna</title>
+<title>I 17 pi&ugrave; grandi scienziati dell'era moderna</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -444,6 +444,42 @@ const scientists = [
     flag: "\uD83C\uDDEC\uD83C\uDDE7"
   },
   {
+    name: "James Watt",
+    years: "1736\u20131819",
+    field: "Ingegneria e Fisica",
+    bio: "Inventore e ingegnere scozzese il cui miglioramento della macchina a vapore aliment\u00f2 la Rivoluzione Industriale.",
+    achievements: [
+      "Invenzione del condensatore separato (1769) \u2014 triplic\u00f2 l'efficienza della macchina a vapore",
+      "Collaborazione con Matthew Boulton: produzione in serie di macchine a vapore migliorate dal 1775",
+      "Introdusse l'unit\u00e0 di misura del cavallo vapore per confrontare le prestazioni dei motori",
+      "Svilupp\u00f2 la macchina a vapore rotativa a doppio effetto per applicazioni industriali",
+      "L'unit\u00e0 SI di potenza (watt) fu denominata in suo onore",
+      "Le sue macchine alimentarono fabbriche, miniere e mulini, inaugurando l'era industriale"
+    ],
+    influence: "La sua macchina a vapore fu la forza motrice della Rivoluzione Industriale.",
+    image: "portraits/20_James_Watt.jpg",
+    symbol: "🚂",
+    flag: "\uD83C\uDFF4\uDB40\uDC67\uDB40\uDC62\uDB40\uDC73\uDB40\uDC63\uDB40\uDC74\uDB40\uDC7F"
+  },
+  {
+    name: "Carl Friedrich Gauss",
+    years: "1777\u20131855",
+    field: "Matematica e Fisica",
+    bio: "Matematico, fisico e astronomo tedesco \u2014 il \u2018Principe della Matematica\u2019.",
+    achievements: [
+      "Disquisitiones Arithmeticae (1801): opera fondamentale della teoria dei numeri moderna",
+      "Svilupp\u00f2 il metodo dei minimi quadrati per l'analisi statistica dei dati",
+      "La distribuzione normale gaussiana (curva a campana) \u2014 fondamento della statistica moderna",
+      "Contributi pionieristici alla geometria non euclidea, esplorata decenni prima di altri",
+      "Insieme a Weber: primo sistema telegrafico elettromagnetico (1833)",
+      "L'unit\u00e0 di densit\u00e0 del flusso magnetico (gauss) porta il suo nome"
+    ],
+    influence: "Plasm\u00f2 quasi ogni campo della matematica e della fisica matematica.",
+    image: "portraits/19_Carl_Friedrich_Gauss.jpg",
+    symbol: "\uD83D\uDCD0",
+    flag: "\uD83C\uDDE9\uD83C\uDDEA"
+  },
+  {
     name: "Charles Darwin",
     years: "1809\u20131882",
     field: "Biologia e Storia Naturale",
@@ -693,7 +729,7 @@ const gridCards = scientists.map((s, i) => {
   </div>`;
 }).join('');
 titleSlide.innerHTML = `
-  <h1>I 15 pi\u00f9 grandi scienziati<br>dell'era moderna</h1>
+  <h1>I 17 pi\u00f9 grandi scienziati<br>dell'era moderna</h1>
   <p>Un viaggio nella storia della scienza</p>
   <div class="title-grid">${gridCards}</div>
 `;
@@ -735,7 +771,7 @@ scientists.forEach((s, i) => {
   slide.innerHTML = `
     ${imageHTML}
     <div class="slide-content">
-      <div class="slide-number">Scienziato ${i + 1} di 15</div>
+      <div class="slide-number">Scienziato ${i + 1} di 17</div>
       <h2>${s.name}</h2>
       <div class="field">${s.field}</div>
       <div class="dates">${s.years}</div>
